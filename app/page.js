@@ -1,11 +1,10 @@
-"use client";
+'use client'
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import ProductCard from "@/components/ProductCard";
 import Footer from "@/components/Footer";
 import axios from "axios";
-import Link from "next/link"; // Import the Link component for routing
-import { useCart } from "@/app/context/CartContext"; // Import useCart to access cart functions
+import { useAppContext } from "@/app/context/AppContext"; // Import the combined context
 
 const images = ["/slide1.jpg", "/slide2.jpg", "/slide3.jpg"];
 
@@ -13,7 +12,8 @@ export default function Home() {
   const [current, setCurrent] = useState(0);
   const [flashSales, setFlashSales] = useState([]);
   const [recommended, setRecommended] = useState([]);
-  const { addToCart } = useCart(); // Get addToCart from the CartContext
+  const [justForYou, setJustForYou] = useState([]); // State for Just for You products
+  const { addToCart } = useAppContext(); // Access addToCart from context
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -24,25 +24,12 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    // Fetch Flash Sales products
-    axios
-      .get("https://fakestoreapi.com/products?limit=4")
-      .then((response) => {
-        setFlashSales(response.data);
-      })
-      .catch((error) =>
-        console.error("Error fetching Flash Sales products:", error)
-      );
-
-    // Fetch Recommended products
-    axios
-      .get("https://fakestoreapi.com/products?limit=4")
-      .then((response) => {
-        setRecommended(response.data);
-      })
-      .catch((error) =>
-        console.error("Error fetching Recommended products:", error)
-      );
+    axios.get("https://fakestoreapi.com/products").then((res) => {
+      const products = res.data;
+      setFlashSales(products.slice(0, 4)); // First 5 products for Flash Sales
+      setRecommended(products.slice(5, 13)); // Next 10 products for Recommended
+      setJustForYou(products.sort(() => 0.5 - Math.random()).slice(0, 20)); // Random 12+ products for Just for You
+    });
   }, []);
 
   return (
@@ -71,7 +58,7 @@ export default function Home() {
             <ProductCard
               key={product.id}
               product={product}
-              addToCart={() => addToCart(product)} // Add to Cart function
+              addToCart={() => addToCart(product)} // Pass addToCart function
             />
           ))}
         </div>
@@ -85,7 +72,21 @@ export default function Home() {
             <ProductCard
               key={product.id}
               product={product}
-              addToCart={() => addToCart(product)} // Add to Cart function
+              addToCart={() => addToCart(product)} // Pass addToCart function
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Just for You Section */}
+      <section className="mt-8 p-4">
+        <h2 className="text-2xl font-semibold text-center mb-6">Just for You</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {justForYou.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              addToCart={() => addToCart(product)} // Pass addToCart function
             />
           ))}
         </div>

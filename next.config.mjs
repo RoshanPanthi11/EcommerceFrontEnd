@@ -4,7 +4,7 @@ const nextConfig = {
       serverActions: true,
     },
     images: {
-      domains: ["fakestoreapi.com"], // ✅ Add this line
+      domains: ["fakestoreapi.com"], 
     },
   };
   

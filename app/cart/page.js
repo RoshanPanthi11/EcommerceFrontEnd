@@ -1,12 +1,12 @@
 "use client";
 
-import { useCart } from "@/app/context/CartContext";
+import { useAppContext } from "@/app/context/AppContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { FaTrashAlt } from "react-icons/fa";
 
 const CartPage = () => {
-  const { cart, removeFromCart, updateQuantity, clearCart } = useCart();
+  const { cart, removeFromCart, updateQuantity, clearCart } = useAppContext();
 
   // Handle quantity change
   const handleQuantityChange = (id, action) => {
