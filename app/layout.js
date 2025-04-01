@@ -1,4 +1,4 @@
-"use client"; // Ensure this file is marked as client-side component
+"use client";
 
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar"; // Import your Navbar component 
