@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer"
+import Footer from "@/components/Footer";
+import { useCart } from "@/app/context/CartContext"; // Import Cart Context
 
 const ProductDetail = ({ params }) => {
   const [product, setProduct] = useState(null);
@@ -17,6 +18,7 @@ const ProductDetail = ({ params }) => {
   });
   const [newReview, setNewReview] = useState({ rating: 5, comment: "" });
   const [showAllReviews, setShowAllReviews] = useState(false); // Toggle state
+  const { addToCart } = useCart(); // Get the addToCart function from CartContext
 
   useEffect(() => {
     // Fetch the product data using the id from the URL
@@ -44,11 +46,15 @@ const ProductDetail = ({ params }) => {
     setRatingDistribution(ratingCounts);
   }, [params.id]);
 
-
-
   const handleShowMoreReviews = () => {
     setShowAllReviews(!showAllReviews); // Toggle the showAllReviews state
     window.scrollTo({ top: 1000, behavior: "smooth" }); // Scroll to the review section smoothly
+  };
+
+  const handleAddToCart = () => {
+    if (product) {
+      addToCart(product); // Add the current product to the cart
+    }
   };
 
   if (!product) return <div>Loading...</div>;
@@ -88,12 +94,17 @@ const ProductDetail = ({ params }) => {
             </div>
           </div>
 
-          <button className="bg-green-600 text-white py-3 rounded-lg mt-6 hover:bg-green-700 transition duration-300 text-lg">
+          {/* Add to Cart Button */}
+          <button
+            onClick={handleAddToCart}
+            className="bg-green-600 text-white py-3 rounded-lg mt-6 hover:bg-green-700 transition duration-300 text-lg"
+          >
             Add to Cart
           </button>
         </div>
       </div>
 
+      {/* Reviews Section */}
       <div className="max-w-7xl mx-auto p-8 flex gap-8">
         {/* Left Section: Reviews */}
         <div className="flex-1 bg-white p-6 rounded-lg shadow-xl">
@@ -146,9 +157,7 @@ const ProductDetail = ({ params }) => {
           )}
         </div>
       </div>
-      <Footer/>
-
-     
+      <Footer />
     </div>
   );
 };

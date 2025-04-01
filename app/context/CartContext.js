@@ -27,18 +27,25 @@ export const CartProvider = ({ children }) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
-  // Update Quantity Function
-  const updateQuantity = (id, quantity) => {
+  // Update Quantity Function (with increase, decrease, or set logic)
+  const updateQuantity = (id, action) => {
     setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item
-      )
+      prevCart.map((item) => {
+        if (item.id === id) {
+          if (action === "increase") {
+            return { ...item, quantity: item.quantity + 1 };
+          } else if (action === "decrease" && item.quantity > 1) {
+            return { ...item, quantity: item.quantity - 1 };
+          }
+        }
+        return item;
+      })
     );
   };
 
   // Calculate Total Price
   const getTotalPrice = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
   };
 
   return (
