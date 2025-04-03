@@ -40,8 +40,13 @@ export const AppProvider = ({ children }) => {
     setCart([]);
   };
 
+  // Get total number of items in the cart
+  const getCartCount = () => {
+    return cart.reduce((total, item) => total + item.quantity, 0);
+  };
+
   return (
-    <AppContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart }}>
+    <AppContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart, getCartCount }}>
       {children}
     </AppContext.Provider>
   );

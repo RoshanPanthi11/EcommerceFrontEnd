@@ -1,12 +1,12 @@
-'use client'
+'use client';
 import { FaShoppingCart } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "@/app/context/AppContext";
 
 export default function Navbar() {
-  const { cart } = useAppContext();
-  const { searchQuery, setSearchQuery } = useAppContext();
+  const { cart, searchQuery, setSearchQuery } = useAppContext();  // Destructure `cart` and `searchQuery`
+  const { getCartCount } = useAppContext();  // Access `getCartCount` function to get total quantity
   const router = useRouter();
 
   const handleSearch = (e) => {
@@ -43,9 +43,10 @@ export default function Navbar() {
       {/* Right: Cart Icon with item count */}
       <Link href="/cart" className="relative">
         <FaShoppingCart className="text-2xl text-white hover:text-gray-200 transition duration-200" />
-        {cart.length > 0 && (
+        {/* Display total count of items in the cart */}
+        {getCartCount() > 0 && (
           <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full animate-bounce">
-            {cart.length}
+            {getCartCount()}
           </span>
         )}
       </Link>
