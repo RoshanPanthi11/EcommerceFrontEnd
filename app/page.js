@@ -1,8 +1,8 @@
 'use client'
 import { useEffect, useState } from "react";
-import Navbar from "@/components/Navbar";
+
 import ProductCard from "@/components/ProductCard";
-import Footer from "@/components/Footer";
+
 import axios from "axios";
 import { useAppContext } from "@/app/context/AppContext";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
@@ -35,7 +35,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <Navbar />
 
       {/* Banner Section */}
       <div className="relative w-full h-[500px] mt-16 overflow-hidden">
@@ -94,7 +93,7 @@ export default function Home() {
         </div>
       </section>
 
-      <Footer />
+      
     </div>
   );
 }

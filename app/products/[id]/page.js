@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { useAppContext } from "@/app/context/AppContext"; // ✅ Corrected Context Import
 import { useParams } from "next/navigation"; // ✅ Correct for Next.js 15
 
@@ -37,42 +35,42 @@ const ProductDetail = () => {
   if (!product) return <div className="text-center mt-20 text-xl font-semibold">Loading...</div>;
 
   return (
-    <div className="bg-gray-100 pt-16">
-      <Navbar />
+    <div className="bg-gray-50 pt-16">
+     
 
       {/* Product Detail Section */}
-      <div className="max-w-7xl mx-auto p-8 flex gap-10 items-center">
+      <div className="max-w-7xl mx-auto p-8 flex gap-12 items-center">
         {/* Left Section: Image */}
         <div className="flex-1">
           <img
             src={product.image}
             alt={product.title}
-            className="w-full h-[400px] object-contain rounded-lg shadow-lg"
+            className="w-full h-[450px] object-contain rounded-xl shadow-lg hover:scale-105 transition-transform duration-500"
           />
         </div>
 
         {/* Right Section: Product Info */}
         <div className="flex-1 flex flex-col gap-6">
-          <h1 className="text-3xl font-bold text-gray-800">{product.title}</h1>
+          <h1 className="text-4xl font-bold text-gray-900">{product.title}</h1>
 
           {/* Product Rating */}
-          <div className="flex items-center gap-3">
-            <span className="text-yellow-500 text-xl">
+          <div className="flex items-center gap-3 text-xl">
+            <span className="text-yellow-500">
               {"⭐".repeat(Math.round(product.rating?.rate || 0))}
             </span>
             <span className="text-gray-600 text-sm">({product.rating?.count || 0} reviews)</span>
           </div>
 
-          <p className="text-2xl font-semibold text-green-500">${product.price}</p>
+          <p className="text-2xl font-semibold text-green-600">${product.price}</p>
 
           {/* Size Selection */}
-          <div className="mt-4">
-            <h3 className="text-xl text-gray-800">Size</h3>
-            <div className="flex gap-4 mt-2">
+          <div className="mt-6">
+            <h3 className="text-xl text-gray-800">Select Size</h3>
+            <div className="flex gap-4 mt-3">
               {["S", "M", "L", "XL"].map((size) => (
                 <button
                   key={size}
-                  className="bg-gray-300 p-3 rounded-md hover:bg-green-600 hover:text-white transition duration-300"
+                  className="bg-gray-300 p-3 rounded-md hover:bg-green-600 hover:text-white transition duration-300 transform hover:scale-105"
                 >
                   {size}
                 </button>
@@ -83,7 +81,7 @@ const ProductDetail = () => {
           {/* Add to Cart Button */}
           <button
             onClick={() => addToCart(product)}
-            className="bg-green-600 text-white py-3 rounded-lg mt-6 hover:bg-green-700 transition duration-300 text-lg"
+            className="bg-gradient-to-r from-green-500 to-teal-400 text-white py-3 rounded-lg mt-8 hover:bg-teal-500 transition duration-300 text-lg"
           >
             Add to Cart
           </button>
@@ -92,7 +90,7 @@ const ProductDetail = () => {
 
       {/* Reviews Section */}
       <div className="max-w-7xl mx-auto p-8">
-        <div className="bg-white p-6 rounded-lg shadow-xl">
+        <div className="bg-white p-8 rounded-lg shadow-xl">
           <h2 className="text-3xl font-semibold text-gray-800 mb-6">Customer Reviews</h2>
 
           {/* Show Reviews */}
@@ -140,7 +138,7 @@ const ProductDetail = () => {
         </div>
       </div>
 
-      <Footer />
+  
     </div>
   );
 };

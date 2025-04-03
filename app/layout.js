@@ -1,7 +1,8 @@
 "use client";
 
 import { Geist, Geist_Mono } from "next/font/google";
-import Navbar from "@/components/Navbar"; // Import your Navbar component 
+import Navbar from "@/components/Navbar"; // Import your Navbar component
+import Footer from "@/components/Footer"; // Import your Footer component
 import { AppProvider } from "@/app/context/AppContext"; // Import AppContext provider
 import "./globals.css"; // Global styles
 import Head from "next/head"; // Import Head for document metadata management
@@ -28,8 +29,15 @@ export default function RootLayout({ children }) {
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <meta charSet="UTF-8" />
           </Head>
+
+          {/* Navbar */}
           <Navbar />
-          {children}
+
+          {/* Main Content */}
+          <main className="flex-1">{children}</main>
+
+          {/* Footer */}
+          <Footer />
         </AppProvider>
       </body>
     </html>

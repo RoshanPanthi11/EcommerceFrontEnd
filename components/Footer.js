@@ -2,7 +2,7 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/f
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-r from-purple-700 via-pink-500 to-red-500 text-white py-8">
+    <footer className="bg-gradient-to-r from-purple-700 via-pink-500 to-red-500 text-white py-8 mt-auto">
       <div className="container mx-auto px-6 flex flex-col items-center justify-center">
         {/* Company Name */}
         <h3 className="text-3xl font-bold tracking-wide">My Store</h3>

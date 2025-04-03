@@ -1,8 +1,6 @@
 "use client";
 
 import { useAppContext } from "@/app/context/AppContext";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { FaTrashAlt } from "react-icons/fa";
 
 const CartPage = () => {
@@ -19,8 +17,7 @@ const CartPage = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen pt-16">
-      <Navbar />
+    <div className="bg-gray-50 min-h-screen pt-16">
 
       <div className="max-w-3xl mx-auto p-6">
         <h1 className="text-3xl font-semibold text-gray-800 mb-6">Your Cart</h1>
@@ -33,9 +30,16 @@ const CartPage = () => {
           <div className="space-y-6">
             {/* Cart Items */}
             {cart.map((item) => (
-              <div key={item.id} className="flex items-center justify-between bg-white p-4 rounded-lg shadow-md border">
+              <div
+                key={item.id}
+                className="flex items-center justify-between bg-white p-4 rounded-xl shadow-lg border transition-transform transform hover:scale-105"
+              >
                 {/* Image */}
-                <img src={item.image} alt={item.title} className="w-16 h-16 object-cover rounded-md" />
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-20 h-20 object-cover rounded-md border border-gray-300"
+                />
 
                 {/* Product Info */}
                 <div className="flex-1 ml-4">
@@ -47,14 +51,14 @@ const CartPage = () => {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => handleQuantityChange(item.id, "decrease")}
-                    className="px-2 py-1 bg-gray-200 text-gray-600 rounded-full hover:bg-gray-300"
+                    className="px-3 py-1 bg-gray-200 text-gray-600 rounded-full hover:bg-gray-300"
                   >
                     -
                   </button>
                   <span className="text-lg">{item.quantity}</span>
                   <button
                     onClick={() => handleQuantityChange(item.id, "increase")}
-                    className="px-2 py-1 bg-gray-200 text-gray-600 rounded-full hover:bg-gray-300"
+                    className="px-3 py-1 bg-gray-200 text-gray-600 rounded-full hover:bg-gray-300"
                   >
                     +
                   </button>
@@ -76,13 +80,13 @@ const CartPage = () => {
         )}
 
         {/* Cart Summary */}
-        <div className="mt-6 bg-white p-4 rounded-lg shadow-md border">
+        <div className="mt-6 bg-white p-6 rounded-xl shadow-lg border">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Cart Summary</h2>
-          <div className="flex justify-between text-lg">
+          <div className="flex justify-between text-lg mb-4">
             <span className="text-gray-600">Total Items:</span>
             <span>{cart.reduce((total, item) => total + item.quantity, 0)}</span>
           </div>
-          <div className="flex justify-between text-lg mt-2">
+          <div className="flex justify-between text-lg mb-4">
             <span className="text-gray-600">Total Price:</span>
             <span className="text-green-600">${getTotal()}</span>
           </div>
@@ -91,20 +95,20 @@ const CartPage = () => {
             {/* Clear Cart Button */}
             <button
               onClick={clearCart}
-              className="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700"
+              className="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300"
             >
               Clear Cart
             </button>
 
             {/* Checkout Button */}
-            <button className="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700">
+            <button className="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300">
               Checkout
             </button>
           </div>
         </div>
       </div>
 
-      <Footer />
+     
     </div>
   );
 };
