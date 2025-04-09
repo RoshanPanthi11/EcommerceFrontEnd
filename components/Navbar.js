@@ -44,7 +44,7 @@ export default function Navbar() {
 
   return (
     <nav className="w-full fixed top-0 left-0 z-50 bg-white shadow-md py-4 px-6 md:px-12">
-      <div className="flex items-center justify-between max-w-7xl mx-auto">
+      <div className="flex items-center justify-between w-full max-w-full mx-0 px-0">
         {/* Logo */}
         <Link
           href="/"
@@ -65,9 +65,7 @@ export default function Navbar() {
             <div className="flex items-center text-blue-950 hover:text-blue-600 cursor-pointer font-medium">
               Categories
               <ChevronDownIcon
-                className={`w-5 h-5 ml-1 transform transition-transform duration-300 ${
-                  isHovering ? "rotate-180" : "rotate-0"
-                }`}
+                className={`w-5 h-5 ml-1 transform transition-transform duration-300 ${isHovering ? "rotate-180" : "rotate-0"}`}
               />
             </div>
 
@@ -84,7 +82,7 @@ export default function Navbar() {
                             <li key={idx}>
                               <Link
                                 href={`/category/${mainCat}/${subCat}/${item}`}
-                                className="text-blue-600 hover:text-blue-800 text-sm hover:underline"
+                                className="text-blue-700 hover:text-blue-800 text-sm hover:underline"
                               >
                                 {item}
                               </Link>
@@ -118,7 +116,7 @@ export default function Navbar() {
             />
             <button
               type="submit"
-              className="bg-blue-600 text-white px-6 py-2 hover:bg-blue-700 transition duration-300"
+              className="bg-blue-950 text-white px-6 py-2 hover:bg-blue-700 transition duration-300"
             >
               Search
             </button>
