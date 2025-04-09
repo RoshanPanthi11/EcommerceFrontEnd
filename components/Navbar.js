@@ -70,15 +70,17 @@ export default function Navbar() {
           <div className="absolute top-full left-0 bg-white shadow-lg rounded-md mt-2 w-64 z-50">
             {Object.entries(categories).map(([mainCat, subCats]) => (
               <div key={mainCat} className="relative group/category">
-                <div className="px-4 py-2 text-gray-800 hover:bg-gray-100 cursor-pointer">
+                <div className="px-4 py-2 text-gray-800 hover:bg-gray-100 cursor-pointer flex justify-between items-center">
                   {mainCat}
+                  <span className="ml-2 text-gray-500">&rsaquo;</span> {/* Right-facing arrow */}
                 </div>
 
                 <div className="absolute left-full top-0 hidden group-hover/category:flex flex-col bg-white shadow-lg rounded-md w-56 z-50">
                   {Object.entries(subCats).map(([subCat, items]) => (
                     <div key={subCat} className="relative group/sub">
-                      <div className="px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
+                      <div className="px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer flex justify-between items-center">
                         {subCat}
+                        <span className="ml-2 text-gray-400">&rsaquo;</span> {/* Right-facing arrow */}
                       </div>
                       <div className="absolute left-full top-0 hidden group-hover/sub:flex flex-col bg-white shadow-lg rounded-md w-56 z-50">
                         {items.map((item, idx) => (
@@ -137,3 +139,4 @@ export default function Navbar() {
     </nav>
   );
 }
+
